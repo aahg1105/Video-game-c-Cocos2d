@@ -1,5 +1,6 @@
 #include "LevelFinal.h"
 #include "Level2.h"
+#include "ending.h"
 #include <cstdlib>
 
 
@@ -105,7 +106,8 @@ void LevelFinal::checkLife() {
         Director::getInstance()->pushScene(next_scene);
     }
     else if (enemy->getLife() <= 0) {
-        Director::getInstance()->pause();
+        auto next_scene = Ending::createScene();
+        Director::getInstance()->pushScene(next_scene);
     }
 }
 
@@ -285,7 +287,7 @@ void LevelFinal::enemyCollisions(float delta) {
 
     if ((enemy->bossTags[enemyCurrent] == "attackB" || enemy->bossTags[enemyCurrent] == "kickB") && ((player->tags[playerCurrent] != "block") || (player->tags[playerCurrent] != "duck"))) {
         player->setLife(player->getLife() - enemy->getStrength());
-        CCLOG("Life K: (%f)", player->getLife());
+        CCLOG("Life K:Â (%f)", player->getLife());
         player->runHurtAnimation();
 
         this->unschedule(CC_SCHEDULE_SELECTOR(LevelFinal::enemyCollisions));
@@ -363,7 +365,7 @@ void LevelFinal::check(cocos2d::Vec2 tempo) {
 
             auto delay = DelayTime::create(.7f);
 
-            CCLOG("Bottle: (%f)", player->getLife());
+            CCLOG("Bottle:Â (%f)", player->getLife());
             CCLOG("Colision");
             return;
         }
